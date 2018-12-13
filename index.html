@@ -1,17 +1,66 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
+        <link rel="stylesheet" type="text/css" href = "styles/styles.css"/>
     </head>
     <body style="background-color: black;" >
         <div style = "height:100%; width: 100%;">
+            <div class = "container-fluid" style = "height:80%;">
+                <div class = "row" style = "position: relative; margin:0px; height:100%;">
+                    <div id = "A" class = "col fade-in" style = "text-align:center;">
+                        <span style = "font-size: 19rem; color:white;">A</span>
+                    </div>
+                    <div id = "J" class = "col fade-in" style = "text-align:center;">
+                        <span style = "font-size: 19rem; color:white;">J</span>
+                    </div>
+                    <div id = "A2" class = "col fade-in" style = "text-align:center;">
+                        <span style = "font-size: 19rem; color:white;" >A</span>
+                    </div>
+                    <div id = "I" class = "col fade-in" style = "text-align:center;">
+                        <span style = "font-size: 19rem; color:white;">I</span>
+                    </div>
+                </div>
+            </div>
 
+            <!--
             <div class ="container" style = "position: relative; top:80px; height:80%; width:70%; border-left: 3px; border-right:3px;
              border-color: red; border-style: solid;">
-                <h1 style = "color:white; text-align:center;">Air Jordan 1</h1>
+                <h1 style = "color:white; text-align:center;
+                ">Air Jordan 1</h1>
                 
             </div>
+            -->
         </div>
 
     </body>
+    <script>
+        window.onload = function() {
+            var a = document.getElementById('A');
+            var j = document.getElementById('J');
+            var a2 = document.getElementById('A2');
+            var i = document.getElementById('I');
+            a.classList.add('active');
+            setTimeout(function() {
+                j.classList.add('active');
+                setTimeout(function(){
+                    a.classList.remove('active');
+                    a2.classList.add('active');
+                    setTimeout(function() {
+                        i.classList.add('active');
+                        j.classList.remove('active');
+                        setTimeout(function() { 
+                            a2.classList.remove('active');
+                            setTimeout(function() {
+                                i.classList.remove('active');
+
+                            },500);
+                        }, 500);
+
+                    }, 500);
+                }, 500);
+            }, 500);
+            
+            
+        }
+    </script>
 </html>
