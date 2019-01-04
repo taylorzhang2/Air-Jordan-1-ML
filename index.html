@@ -2,22 +2,32 @@
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href = "styles/styles.css"/>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Staatliches|Roboto" rel="stylesheet">
+
     </head>
     <body style="background-color: black;" >
         <div style = "height:100%; width: 100%;">
-            <div class = "container-fluid" style = "height:80%;">
-                <div class = "row" style = "position: relative; margin:0px; height:100%;">
-                    <div id = "A" class = "col fade-in" style = "text-align:center;">
-                        <span style = "font-size: 19rem; color:white;">A</span>
+            <div id = "whole" class = "container-fluid background-slider-right" style = "height:100%;">
+                <div class = "row header-font" style = "position: relative; margin:0px; height:100%;">
+                    <div class = "col-md-6" style = "height:100%;">
+                        <div id = "left-half" class = "row flex-center" style = "height:100%;">
+                            <div id = "A" class = "col-lg-6 fade-in" style = "text-align:center;">
+                                <span style = "font-size: 19rem; color:white;">A</span>
+                            </div>
+                            <div id = "J" class = "col-lg-6 fade-in" style = "text-align:center;">
+                                <span style = "font-size: 19rem; color:white;">J</span>
+                            </div>
+                        </div>
                     </div>
-                    <div id = "J" class = "col fade-in" style = "text-align:center;">
-                        <span style = "font-size: 19rem; color:white;">J</span>
-                    </div>
-                    <div id = "A2" class = "col fade-in" style = "text-align:center;">
-                        <span style = "font-size: 19rem; color:white;" >A</span>
-                    </div>
-                    <div id = "I" class = "col fade-in" style = "text-align:center;">
-                        <span style = "font-size: 19rem; color:white;">I</span>
+                    <div class = "col-lg-6">
+                        <div id = "right-half" class = "row flex-center" style = "height:100%;">
+                            <div id = "A2" class = "col-lg-6 fade-in" style = "text-align:center;">
+                                <span style = "font-size: 19rem;" class = "varsity-red" >A</span>
+                            </div>
+                            <div id = "I" class = "col-lg-6 fade-in" style = "text-align:center;">
+                                <span style = "font-size: 19rem;" class = "varsity-red">I</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -34,7 +44,11 @@
 
     </body>
     <script>
+        var timeout = 700;
         window.onload = function() {
+            var whole = document.getElementById('whole'); 
+            var left = document.getElementById('left-half');
+            var right = document.getElementById('right-half');
             var a = document.getElementById('A');
             var j = document.getElementById('J');
             var a2 = document.getElementById('A2');
@@ -49,16 +63,30 @@
                         i.classList.add('active');
                         j.classList.remove('active');
                         setTimeout(function() { 
-                            a2.classList.remove('active');
+                            //a2.classList.remove('active');
+                            left.classList.add('active');
+                            right.classList.add('active');
+                            whole.classList.add('active');
                             setTimeout(function() {
-                                i.classList.remove('active');
+                                whole.classList.add('active2'); 
+                                //i.classList.remove('active');
+                                //whole.classList.add('active2'); 
+                                setTimeout(function() {
+                                   whole.classList.remove('active2'); 
+                                   whole.classList.remove('active'); 
+                                   setTimeout(function() {
+                                    i.classList.add('hide');
+                                    a2.classList.add('hide');
 
-                            },500);
-                        }, 500);
+                                   }, 100);
+                                }, timeout);
 
-                    }, 500);
-                }, 500);
-            }, 500);
+                            }, 200);
+                        }, timeout);
+
+                    }, timeout);
+                }, timeout);
+            }, timeout);
             
             
         }

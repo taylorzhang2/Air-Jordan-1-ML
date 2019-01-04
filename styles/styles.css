@@ -4,6 +4,92 @@
 }
 
 .fade-in {
-    transition: 2s ease all;
+    transition: 1s ease all;
     opacity:0;
+}
+
+.varsity-red {
+    color: #B01301;
+}
+
+body {
+    font-family: 'Staatliches', cursive;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+.flex-center {
+    height: 100%;
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-font {
+    font-family: 'Roboto', sans-serif;
+
+}
+.background-slider-left {
+    background-image: linear-gradient(to left,
+                                      white,
+                                      white 50%,
+                                      transparent 50%,
+                                      transparent);
+    background-position: 0 center;
+    background-size: 300% 100%;
+    transition: all .4s ease-in;
+    
+}
+
+.background-slider-left.active {
+    background-position: 100% center;
+
+}
+
+.background-slider-right {
+    background-image: linear-gradient(to right,
+                                      black,
+                                      black 33.33333%,
+                                      #B01301 33.33333%,
+                                      #B01301 66.66666%,
+                                      transparent 66.66666%,
+                                      transparent);
+    background-position: 100% 0;
+    background-size: 300% 100%;
+    transition: all .45s ease-out;
+    
+}
+.background-slider-black {
+    background-image: linear-gradient(to right,
+                                      black,
+                                      black 50%,
+                                      transparent 50%,
+                                      transparent);
+    background-position: 100% 0;
+    background-size: 300% 100%;
+    transition: all .45s ease-out;
+
+}
+
+.background-slider-black.active {
+
+    background-position: 100% center;
+}
+
+.background-slider-right.active {
+    background-position: 50% 0;
+
+}
+
+.background-slider-right.active2 {
+    background-position: 0 0;
+}
+.hide {
+    display: none;
 }
