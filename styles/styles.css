@@ -39,8 +39,8 @@ body {
 
 }
 .animate-upload {
-    animation: upload-fadein 1s ease-out;
-    -webkit-animation: upload-fadein 1s ease-out;
+    animation: upload-fadein 1s ease-out both;
+    -webkit-animation: upload-fadein 1s ease-out both;
 
 }
 
