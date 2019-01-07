@@ -8,7 +8,7 @@
     <body style="background-color: black;" >
         <div style = "height:100%; width: 100%;">
             <div id = "whole" class = "container-fluid background-slider-right" style = "height:100%;">
-                <div class = "row header-font" style = "position: relative; margin:0px; height:100%;">
+                <div id = "intro" class = "row header-font" style = "position: relative; margin:0px; height:100%;">
                     <div class = "col-md-6" style = "height:100%;">
                         <div id = "left-half" class = "row flex-center" style = "height:100%;">
                             <div id = "A" class = "col-lg-6 fade-in" style = "text-align:center;">
@@ -30,6 +30,12 @@
                         </div>
                     </div>
                 </div>
+                    <div id = "upload" class="row-overlay hide">
+                        
+                        <div class = "box" data-text-before = "2">
+                            <span class = "varsity-red">Drag an image in or click to upload</span>
+                        </div>
+                    </div>
             </div>
 
             <!--
@@ -53,6 +59,8 @@
             var j = document.getElementById('J');
             var a2 = document.getElementById('A2');
             var i = document.getElementById('I');
+            var intro = document.getElementById('intro');
+            var upload = document.getElementById('upload');
             a.classList.add('active');
             setTimeout(function() {
                 j.classList.add('active');
@@ -77,7 +85,13 @@
                                    setTimeout(function() {
                                     i.classList.add('hide');
                                     a2.classList.add('hide');
-
+                                    setTimeout(function() {
+                                        intro.classList.add('hide');
+                                        setTimeout(function() {
+                                            upload.classList.remove('hide');
+                                            upload.classList.add('animate-upload');
+                                        })
+                                    }, 500);
                                    }, 100);
                                 }, timeout);
 
