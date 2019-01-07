@@ -3,7 +3,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href = "styles/styles.css"/>
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Staatliches|Roboto" rel="stylesheet">
-
+        <script src="scripts/jquery-3.3.1.js"></script>
     </head>
     <body style="background-color: black;" >
         <div style = "height:100%; width: 100%;">
@@ -33,7 +33,17 @@
                     <div id = "upload" class="row-overlay hide">
                         
                         <div class = "box" data-text-before = "2">
-                            <span class = "varsity-red">Drag an image in or click to upload</span>
+                                <form class="" id = "form" method="post" action="" enctype="multipart/form-data">
+                                    <div class="box__input">
+                                      <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
+                                      
+                                        <label id = "updload-text" class = "varsity-red" for="file"> <span>Drag an image in or click to upload</span></label>
+                                      <button class="box__button" type="submit">Upload</button>
+                                    </div>
+                                    <div class="box__uploading">Uploading&hellip;</div>
+                                    <div class="box__success">Done!</div>
+                                    <div class="box__error">Error! <span></span>.</div>
+                                  </form>
                         </div>
                     </div>
             </div>
@@ -51,6 +61,53 @@
     </body>
     <script>
         var timeout = 700;
+        var isAdvancedUpload = function() {
+            var div = document.createElement('div');
+            return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window; 
+        }();
+        console.log('is advanced upload: ' + isAdvancedUpload);
+        var $form = $('#form');
+        console.log($form);
+        var uploadText = document.getElementById('upload-text');
+        if (!isAdvancedUpload) {
+            uploadText.innerHTML = 'Click to upload';
+            var droppedFiles = false;
+            $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+                console.log('drag');
+                e.preventDefault();
+                e.stopPropagation();
+            })
+            .on('dragover dragenter', function() {
+                $form.addClass('is-dragover');
+                console.log('dragover');
+            })
+            .on('dragleave dragend drop', function() {
+                $form.removeClass('is-dragover');
+                console.log('dragleave');
+                
+            })
+            .on('drop', function(e) {
+                droppedFiles = e.originalEvent.dataTransfer.files;
+                console.log('drop');
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+        }
+        $form.on('submit', function(e) {
+            if ($form.hasClass('is-uploading')) {
+                return false;
+            }
+            $form.addClass('is-uploading').removeClass('is-error');
+
+            if(isAdvancedUpload) {
+                event.preventDefault();
+                e.stopPropagation();
+                console.log('here');
+            } else {
+
+            }
+        });
         window.onload = function() {
             var whole = document.getElementById('whole'); 
             var left = document.getElementById('left-half');

@@ -8,6 +8,39 @@
     opacity:0;
 }
 
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+    display:none;
+}
+.box__file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.box__button {
+    font-weight: 700;     
+    color: #e5edf1;     
+    background-color: #39bfd3;     
+    display: none;     
+    padding: 8px 16px;
+    margin: 40px auto 0; 
+}
+.is-dragover {
+    background-color:grey;
+}
+
+.form.is-uploading .box__input {
+    visibility: none;
+}
+
 .varsity-red {
     color: #B01301;
 }
