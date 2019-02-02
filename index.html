@@ -45,7 +45,10 @@
                                         <button class="box__button" type="submit">Upload</button>
                                     </div>
                                     <div class="box__uploading">Uploading&hellip;</div>
-                                    <div class="box__success">Done!</div>
+                                    <div class="box__success">
+                                        <img id = "success" src = "resources/tick.svg"/>
+                                        <img id = "failure" src = "resources/cancel.svg"/>
+                                    </div>
                                     <div class="box__error">Error! <span></span>.</div>
                                     <input type = "hidden" name = "ajx" value = "1"/>
                         </div>
@@ -84,9 +87,9 @@
             $label.text(files.length > 1 ? ($input.attr('data-multiple-caption') || '').replace('{count}', files.length) : files.name);
         };
         var uploadText = document.getElementById('upload-text');
+        var droppedFiles = false;
         if (isAdvancedUpload) {
             uploadText.innerHTML = 'Drag an image, or click to upload.';
-            var droppedFiles = false;
             console.log('is advancedupload');
             $form.addClass('has-advanced-upload');
             $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
@@ -141,12 +144,56 @@
                 e.preventDefault();
                 e.stopPropagation();
                 console.log('here');
+                var url = "http://localhost:5000/predict";
+                var formData = new FormData($form.get(0));
+                if (droppedFiles) {
+                    formData.append('image',droppedFiles[0]);
+                    console.log('dropped files: ' + JSON.stringify(formData));
+                    console.log(droppedFiles[0]);
+                    $.ajax({
+                        'url': url,
+                        type: 'POST',
+                        data: formData,
+                        crossDomain: true,
+                        xhrFields: {
+                            withCredentials: false
+                        },
+                        success: function(response, textStatus, jqXHR) {
+                            console.log(textStatus);
+                            console.log('data: ' +  JSON.stringify(response));
+                            setTimeout(function() {
+                                $('#loader').removeClass('active') 
+                                setTimeout(function() {
+                                    showResult(response);
+
+                                }, 500)
+                            }, 1500);
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log(errorThrown);
+                        },
+                        processData: false,
+                        contentType: false
+                    });
+                }
             } else {
                 e.preventDefault();
                 e.stopPropagation();
 
             }
         });
+        function showResult(response) {
+            var success = response['success'];
+            $('.loader').addClass('hide');
+            $('.box__success').css('display', 'block');
+            $
+            if (success) {
+                $('#failure').css('display', 'none');
+            } else {
+                $('#success').css('display', 'none');
+                
+            }
+        }
         window.onload = function() {
             var whole = document.getElementById('whole'); 
             var left = document.getElementById('left-half');
