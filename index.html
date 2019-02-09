@@ -41,15 +41,50 @@
                                             Drag an image in or click to upload</span>
                                             
                                         </label>
-                                        <div id = "loader" class = "loader hide"/>
                                         <button class="box__button" type="submit">Upload</button>
                                     </div>
-                                    <div class="box__uploading">Uploading&hellip;</div>
-                                    <div class="box__success">
-                                        <img id = "success" src = "resources/tick.svg"/>
-                                        <img id = "failure" src = "resources/cancel.svg"/>
+                                    <div id = "box__uploading" class="box__uploading">
+                                        <div id = "loader" class = "loader hide"></div>
+
                                     </div>
-                                    <div class="box__error">Error! <span></span>.</div>
+                                    <div class="box__success" style = "z-index:99;">
+                                        <div class = "box__success-top-text">
+                                            Success! Your picture is (probably) an Air Jordan 1!
+                                        </div>
+
+                                        <svg id="success" class ="success-color hide" style="enable-background:new 0 0 50 50;" 
+                                        version="1.1" 
+                                        viewBox="0 0 50 50" 
+                                        xml:space="preserve"
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <g id="Layer_1_1_">
+                                            <polygon points="47.293,6.94 14,40.232 2.707,28.94 1.293,30.353 14,43.06 48.707,8.353  "/>
+                                        </g></svg>
+                                        <button class = "box__success-button hide">USE ANOTHER PICTURE</button>
+                                    </div>
+                                    <div class="box__failure" style = "z-index:99;">
+                                        <div class = "box__failure-top-text hide" >
+                                            Sorry! Your picture is (probably) not an Air Jordan 1.
+                                        </div>
+                                        <svg id="failure" class = "hide" style="enable-background:new 0 0 139 139; height:300px;" version="1.1" viewBox="0 0 139 139" xml:space="preserve" 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <style type="text/css">
+                                                .st0{fill:none;stroke-width:6;stroke-miterlimit:10;}
+                                                .st1{display:none;fill:none;stroke-width:6;stroke-miterlimit:10;}
+                                                .st2{display:none;}
+                                            </style>
+                                            <line class="st0 cancel-color" id="failure_x1" x1="100" x2="39" y1="38.6" y2="99.6"/>
+                                            <line class="st0 cancel-color" id="failure_x3" x1="100" x2="39" y1="99.6" y2="38.6"/>
+                                            <line class="st1 cancel-color" id="failure_x2" x1="56.8" x2="69.5" y1="94.2" y2="111.2"/>
+                                            <line class="st1" id="XMLID_21_" x1="69.5" x2="82.2" y1="111.2" y2="94.2"/>
+                                            <rect class="st2" height="1.4" id="XMLID_23_" width="4.8" x="67.1" y="111.6"/>
+                                        </svg>
+                                        <button class = "box__failure-button hide">USE ANOTHER PICTURE</button>
+
+                                    </div>
+                                    <div class="box__error hide">Error! <span></span>.</div>
                                     <input type = "hidden" name = "ajx" value = "1"/>
                         </div>
                         <div style = "position:absolute; width : 50%; height: 65%;">
@@ -128,11 +163,13 @@
             if ($form.hasClass('is-uploading')) {
                 return false;
             }
+            $('#upload-text').addClass('hide');
             $form.addClass('is-uploading').removeClass('is-error');
-            $label.addClass('hide-opacity');
+            $label.addClass('hide');
             $('.box').addClass('hide-before');
             $('.box').addClass('hide-after');
             $('.loader').removeClass('hide');
+            $('#box__uploading').removeClass('box__uploading');
 
             setTimeout(function() {
                 $('#loader').addClass('active');
@@ -183,14 +220,31 @@
             }
         });
         function showResult(response) {
+            $('#box__uploading').addClass('box__uploading');
             var success = response['success'];
             $('.loader').addClass('hide');
-            $('.box__success').css('display', 'block');
-            $
+             
             if (success) {
+                $('.box__success').css('display', 'block');
                 $('#failure').css('display', 'none');
+                setTimeout(function() {
+                    $('#success').addClass('active');
+                    $('#success').removeClass('hide');
+                    $('.box__success-top-text').removeClass('hide');
+                    $('.box__success-button').removeClass('hide');
+                }, 200);
             } else {
+                $('.box__failure').css('display', 'block');
                 $('#success').css('display', 'none');
+                setTimeout(function() {
+                    $('#failure_x1').addClass('active');
+                    $('#failure_x3').addClass('active');
+                    $('#failure').removeClass('hide');
+
+                    $('.box__failure-top-text').removeClass('hide');
+                    $('.box__failure-button').removeClass('hide');
+
+                }, 200);
                 
             }
         }
