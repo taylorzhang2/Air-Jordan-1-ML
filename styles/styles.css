@@ -1,3 +1,8 @@
+input:focus {outline: none; }
+button:focus {
+    outline:none;
+}
+
 .fade-in.active {
    opacity: 1;  
 	
@@ -96,13 +101,14 @@
 
 .box__result-peripheral-fade {
     opacity: 0;
-    transition: opacity 2s ease-out 2s, color 1s;
+    transition: opacity 2s ease-out 0s, color 1s;
     cursor: pointer;
     color: ivory;
     
 
 }
 .box__result-peripheral-fade.active {
+    transition: opacity 2s ease-out 2s, color 1s;
     opacity: 1;
 }
 
@@ -145,7 +151,6 @@ button::before, button::after {
     margin: 40px auto 0; 
 }
 .is-dragover {
-    background-color:grey;
 }
 
 .form.is-uploading .box__input {

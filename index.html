@@ -87,10 +87,11 @@
                                     <div class="box__error hide">Error! <span></span>.</div>
                                     <input type = "hidden" name = "ajx" value = "1"/>
                         </div>
-                        <div style = "position:absolute; width : 50%; height: 65%;">
-                                <form style = "height:100%;" class="" id = "form" method="post" action="" novalidate enctype="multipart/form-data">
-                                      <input class="box__file box-form" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
-                                  </form>
+                        <div style = "position:absolute; width : 50%; height: 95%;">
+                            <form style = "height:100%;width:100%" class="" id = "form" method="post" action="" novalidate enctype="multipart/form-data">
+                                <input title = " " style = "z-index: 1000; height:100%;width:100%" class="box__file box-form" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
+                                <label for = "files"></label>
+                            </form>
 
                         </div>
                     </div>
@@ -119,7 +120,7 @@
         var showFiles = function(files) {
             console.log($label);
             console.log(files.name);
-            $label.text(files.length > 1 ? ($input.attr('data-multiple-caption') || '').replace('{count}', files.length) : files.name);
+            //$label.text(files.length > 1 ? ($input.attr('data-multiple-caption') || '').replace('{count}', files.length) : files.name);
         };
         var uploadText = document.getElementById('upload-text');
         var droppedFiles = false;
@@ -158,11 +159,22 @@
                 $form.trigger('submit');
             });
 
+        } else {
+            uploadText.innerHTML = 'Click to upload a shoe.';
+             
         }
+        $('#file').on('change', function(e) {
+            droppedFiles = e.target.files;
+            $form.trigger('submit');
+        });
         $form.on('submit', function(e) {
+            $("#file").attr('disabled', 'disabled');
             if ($form.hasClass('is-uploading')) {
+                $("#file").attr('disabled', '');
                 return false;
             }
+            $('#file').css('z-index', '0');
+            console.log('submit');
             $('#upload-text').addClass('hide');
             $form.addClass('is-uploading').removeClass('is-error');
             $label.addClass('hide');
@@ -208,6 +220,7 @@
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.log(errorThrown);
+
                         },
                         processData: false,
                         contentType: false
@@ -220,13 +233,16 @@
             }
         });
         function showResult(response) {
+            $form.trigger('reset');
+            $form.removeClass('is-error');
+            $form.removeClass('is-uploading');
             $('#box__uploading').addClass('box__uploading');
             var success = response['success'];
             $('.loader').addClass('hide');
              
             if (success) {
                 $('.box__success').css('display', 'block');
-                $('#failure').css('display', 'none');
+                $('#failure').addClass('hide');
                 $('#success').removeClass('hide');
                 $('.box__success-button').removeClass('hide');
                 $('.box__success-top-text').removeClass('hide');
@@ -238,7 +254,7 @@
                 }, 300);
             } else {
                 $('.box__failure').css('display', 'block');
-                $('#success').css('display', 'none');
+                $('#success').addClass('hide');
                 $('#failure').removeClass('hide');
                 $('.box__failure-button').removeClass('hide');
                 $('.box__failure-top-text').removeClass('hide');
@@ -256,24 +272,30 @@
             console.log('CLICK');
             var selector = '.box__success';
             var success = '#success'; 
+            
             console.log($(this));
             if($(this).hasClass('box__failure-button')) {
                 selector = '.box__failure';
                 success = '#failure';
             }
+            var toptext = selector + '-top-text';
+            $(toptext).css('transition-delay', '0 !important');
+            $(success).css('transition-delay', '0 !important');
             $(this).removeClass('active');
-            $(selector + '-top-text').removeClass('active');
+            $(toptext).removeClass('active');
             $(success).removeClass('active');
             var that = this;
             setTimeout(function () {
                 $(that).addClass('hide');
                 $(selector + '-top-text').addClass('hide');
                 $(success).addClass('hide');
+                
                 var intro = document.getElementById('intro');
                 var upload = document.getElementById('upload');
-                 
+                $(upload).addClass('hide');  
                 $(intro).removeClass('hide');
                 whole.classList.add('active');
+                upload.classList.remove('animate-upload');
                 setTimeout(function() {
                     whole.classList.add('active2'); 
                     setTimeout(function() {
@@ -282,14 +304,16 @@
                         setTimeout(function() {
                             intro.classList.add('hide');
                             setTimeout(function() {
+                                //$("#form").prop('disabled', false);​
                                 upload.classList.remove('hide');
                                 upload.classList.add('animate-upload');
                                 $('#upload-text').removeClass('hide');
-                                $form.addClass('is-uploading').addClass('is-error');
                                 $label.text = 'Drag an image in or click to upload';
                                 $label.removeClass('hide');
                                 $('.box').removeClass('hide-before');
                                 $('.box').removeClass('hide-after');
+                                $('#file').removeAttr('disabled');
+                                $('#file').css('z-index', '1000');
                             });
                         }, 500);
                     }, 700);
