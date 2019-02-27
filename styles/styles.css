@@ -149,8 +149,6 @@ button::before, button::after {
     
     
 .box__file {
-    padding-left: 41em;
-    padding-top: 29em;
     cursor: pointer;
     width: 0.1px;
     height: 0.1px;
@@ -236,6 +234,7 @@ body {
     border-left: 2px solid #B01301;
     transition: 0.5s ease-in all;
     opacity:1;
+    height:2em;
 }
 
 .box-form {
@@ -252,6 +251,7 @@ body {
     border-right: 2px solid #B01301;
     transition: 0.5s ease-in all;
     opacity:1;
+    height:2em;
 }
 
 .box.hide-before::before {

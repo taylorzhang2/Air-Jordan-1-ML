@@ -54,6 +54,7 @@ if (isAdvancedUpload) {
 }
 $('#file').on('change', function(e) {
     droppedFiles = e.target.files;
+    console.log('change');
     $form.trigger('submit');
 });
 $form.on('submit', function(e) {
@@ -124,7 +125,6 @@ $form.on('submit', function(e) {
 function showResult(response) {
     $form.trigger('reset');
     $form.removeClass('is-error');
-    $form.removeClass('is-uploading');
     $('#box__uploading').addClass('box__uploading');
     var success = response['success'];
     $('.loader').addClass('hide');
@@ -174,6 +174,7 @@ $('.box__success-button, .box__failure-button').on('click', function() {
     var that = this;
     setTimeout(function () {
         $(that).addClass('hide');
+        console.log(that);
         $(selector + '-top-text').addClass('hide');
         $(success).addClass('hide');
         
@@ -201,6 +202,7 @@ $('.box__success-button, .box__failure-button').on('click', function() {
                         $('.box').removeClass('hide-after');
                         $('#file').removeAttr('disabled');
                         $('#file').css('z-index', '1000');
+                        $form.removeClass('is-uploading');
                     });
                 }, 500);
             }, 700);
