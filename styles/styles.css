@@ -2,6 +2,23 @@ input:focus {outline: none; }
 button:focus {
     outline:none;
 }
+.model-title-override {
+    background-color: black !important;
+    
+}
+
+.centered-modal.in {
+    display: flex !important;
+}
+.centered-modal .modal-dialog {
+    margin: auto;
+}
+
+.modal-header-override > button > span{
+    text-shadow:none;
+    color: #B01301;
+}
+
 
 .fade-in.active {
    opacity: 1;  
@@ -132,6 +149,9 @@ button::before, button::after {
     
     
 .box__file {
+    padding-left: 41em;
+    padding-top: 29em;
+    cursor: pointer;
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
@@ -139,7 +159,7 @@ button::before, button::after {
     overflow-x: hidden;
     overflow-y: hidden;
     position: absolute;
-    z-index: -1;
+    z-index: 1000;
 }
 
 .box__button {

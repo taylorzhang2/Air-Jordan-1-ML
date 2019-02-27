@@ -1,11 +1,66 @@
 <html>
     <head>
+        <script src="scripts/jquery-3.3.1.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href = "styles/styles.css"/>
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Staatliches|Roboto" rel="stylesheet">
-        <script src="scripts/jquery-3.3.1.js"></script>
     </head>
-    <body style="background-color: black;" >
+    <body style="background-color: #000000;" >
+        <div style = "position:absolute; padding-top:20px; width:100%; z-index: 99999; color:wheat; font-weight:bolder; font-family:Roboto, sans-serif;">
+            <!--
+            <div style = "margin-left: 30px; margin-top: 30px;">
+                <a style = "color:wheat;" href = "https://www.github.com/taylorzhang2">TAYLOR ZHANG</a>
+            </div>
+            <div>
+
+            </div>
+
+            -->
+
+            <div class = "container-fluid">
+                <div class = "row">
+                    <div class = "col col-2 col-sm-2 text-center">
+                        <a style = "color:wheat;" target="_blank" href = "https://www.github.com/taylorzhang2">TAYLOR ZHANG</a>
+                        
+                    </div>
+                    <div class = "col col-8 col-sm-8">
+                        
+
+                    </div>
+                    <div class = "col col-2 col-sm-2 text-center">
+                        <button type="button" class="btn btn-primary" style = "border: none; color: #B01301; background-color:black;"data-toggle="modal"  data-target="#modal">?</button>
+                        <div class="modal fade centered-modal" id = "modal" style = "z-index:9999; color:#B01301;" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                <div class = "modal-content" style = "border: .3em solid #B01301;">
+
+
+                                
+                                    <div class="modal-header modal-header-override" style = "background-color:black; border-bottom:none;">
+                                        <h5 class="modal-title" id="exampleModalLabel">FAQ</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                        
+                                    <div class="" style = "background-color:black; text-align: left; padding-left:10px; padding-right:10px;">
+                                    This is a website that tries to identify an Air Jordan 1 from other shoes.
+                                    </br>
+                                    It uses a deep learning model made from Keras and Tensorflow. It's not perfect, as it's trained 
+                                    on pictures from the internet. It also will not properly classify a picture that isn't a shoe.
+                                    </br>
+                                    This was a fun project and I'll make more improvements to the model in the future.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
         <div style = "height:100%; width: 100%;">
             <div id = "whole" class = "container-fluid background-slider-right" style = "height:100%;">
                 <div id = "intro" class = "row header-font" style = "position: relative; margin:0px; height:100%;">
@@ -89,7 +144,7 @@
                         </div>
                         <div style = "position:absolute; width : 50%; height: 95%;">
                             <form style = "height:100%;width:100%" class="" id = "form" method="post" action="" novalidate enctype="multipart/form-data">
-                                <input title = " " style = "z-index: 1000; height:100%;width:100%" class="box__file box-form" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
+                                <input title = " " class="box__file box-form" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
                                 <label for = "files"></label>
                             </form>
 
@@ -106,6 +161,8 @@
             </div>
             -->
         </div>
+
+        
 
     </body>
     <script>
@@ -279,8 +336,6 @@
                 success = '#failure';
             }
             var toptext = selector + '-top-text';
-            $(toptext).css('transition-delay', '0 !important');
-            $(success).css('transition-delay', '0 !important');
             $(this).removeClass('active');
             $(toptext).removeClass('active');
             $(success).removeClass('active');
