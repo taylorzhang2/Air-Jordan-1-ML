@@ -232,14 +232,11 @@ window.onload = function() {
                 i.classList.add('active');
                 j.classList.remove('active');
                 setTimeout(function() { 
-                    //a2.classList.remove('active');
                     left.classList.add('active');
                     right.classList.add('active');
                     whole.classList.add('active');
                     setTimeout(function() {
                         whole.classList.add('active2'); 
-                        //i.classList.remove('active');
-                        //whole.classList.add('active2'); 
                         setTimeout(function() {
                             whole.classList.remove('active2'); 
                             whole.classList.remove('active'); 

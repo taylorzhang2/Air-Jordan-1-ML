@@ -409,3 +409,14 @@ body {
 .hide-opacity {
     opacity: 0;
 }
+
+@media only screen 
+    and (max-width:415px) {
+    .responsive-height{ 
+        height:50%;
+        
+    }
+    .responsive-text {
+        font-size:8em !important;
+    }        
+}
