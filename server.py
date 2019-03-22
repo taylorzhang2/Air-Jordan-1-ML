@@ -16,7 +16,7 @@ model._make_predict_function()
 
 def prepare_image(image, target):
     if (image.mode != "RGB"):
-            image = image.convert("RGB")
+        image = image.convert("RGB")
     image = image.resize(target)
     image = img_to_array(image)
     image = np.expand_dims(image, axis=0)
@@ -25,13 +25,11 @@ def prepare_image(image, target):
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    print('predict')
+    #print('predict')
     data = {"success": False}
     if flask.request.method == "POST":
-        print('post')
         print(flask.request.files)
         if flask.request.files.get("image"):
-            print('image')
             image = flask.request.files["image"].read()
             image = Image.open(io.BytesIO(image))
             image = prepare_image(image, target = (150,150))
@@ -54,5 +52,5 @@ def predict():
 if __name__ == "__main__":
     print(("* Loading Keras model and Flask starting server..."
         "please wait until server has fully started"))
-    app.run()
+    app.run(host = "0.0.0.0", port = 5000);
 
