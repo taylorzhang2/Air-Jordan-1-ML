@@ -1,6 +1,6 @@
 
 var timeout = 700;
-var url = 'http://ec2-54-149-148-218.us-west-2.compute.amazonaws.com:8080/predict';
+var url = 'https://airjordanai.dev:8080/predict';
 var isAdvancedUpload = function() {
     var div = document.createElement('div');
     return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window; 
