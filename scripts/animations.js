@@ -213,6 +213,7 @@ $('.box__success-button, .box__failure-button').on('click', function() {
     //$(selector).css('display', 'none');
 });
 window.onload = function() {
+    init();
     var whole = document.getElementById('whole'); 
     var left = document.getElementById('left-half');
     var right = document.getElementById('right-half');
@@ -264,3 +265,28 @@ window.onload = function() {
     
     
 }
+function init() {
+
+    var overlay = $('.md-overlay');
+    var trigger = $('.md-trigger');
+    //var att = trigger.attr('data-modal');
+    var modal = $('#modal-1');
+    var close = $('.md-close');
+    trigger.on('click', function(event) {
+        modal.addClass('md-show');
+        
+        overlay.off( 'click', removeModal);
+        overlay.on( 'click', removeModal);
+
+    });
+    close.on('click', function(event) {
+        event.stopPropagation();
+        removeModal();
+    });
+    function removeModal( hasPerspective ) {
+        modal.removeClass('md-show');
+    }
+
+
+}
+
