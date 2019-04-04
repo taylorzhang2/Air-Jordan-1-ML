@@ -81,7 +81,6 @@ button:focus {
 	opacity: 1;
 }
 
-
 .fade-in.active {
    opacity: 1;  
 	
@@ -481,4 +480,12 @@ body {
     .responsive-text {
         font-size:8em !important;
     }        
+}
+@media only screen 
+    and (max-width:820px) {
+    .responsive-box{ 
+        height:300px !important;
+	max-width:300px !important;
+        
+    }
 }
