@@ -167,60 +167,80 @@ function showResult(response) {
 }
 $('.box__success-button, .box__failure-button').on('click', function() {
     console.log('CLICK');
-    var selector = '.box__success';
-    var success = '#success'; 
-    
-    console.log($(this));
-    if($(this).hasClass('box__failure-button')) {
-        selector = '.box__failure';
-        success = '#failure';
-    }
-    var toptext = selector + '-top-text';
-    $(this).removeClass('active');
-    $(toptext).removeClass('active');
-    $(success).removeClass('active');
-    var that = this;
-    setTimeout(function () {
-        $(that).addClass('hide');
-        console.log(that);
-        $(selector + '-top-text').addClass('hide');
-        $(success).addClass('hide');
-        
-        var intro = document.getElementById('intro');
-        var upload = document.getElementById('upload');
-        $(upload).addClass('hide');  
-        $(intro).removeClass('hide');
-        whole.classList.add('active');
-        upload.classList.remove('animate-upload');
+    if ($(this).attr('id') == 'title-button') {
         setTimeout(function() {
-            whole.classList.add('active2'); 
-            setTimeout(function() {
-                whole.classList.remove('active2'); 
-                whole.classList.remove('active'); 
-                setTimeout(function() {
-                    intro.classList.add('hide');
-                    setTimeout(function() {
-                        //$("#form").prop('disabled', false);​
-                        upload.classList.remove('hide');
-                        upload.classList.add('animate-upload');
-                        $('#upload-text').removeClass('hide');
-                        $label.text = 'Drag an image in or click to upload';
-                        $label.removeClass('hide');
-                        $('.box').removeClass('hide-before');
-                        $('.box').removeClass('hide-after');
-                        $('#file').removeAttr('disabled');
-                        $('#file').css('z-index', '1000');
-                        $form.removeClass('is-uploading');
-                    });
-                }, 500);
-            }, 700);
-        }, 200);
+            document.getElementById('title-container').classList.add('hide');
+            upload.classList.remove('hide');
+            upload.classList.add('animate-upload');
+            $('#upload-text').removeClass('hide');
+            $label.text = 'Drag an image in or click to upload';
+            $label.removeClass('hide');
+            $('.box').removeClass('hide-before');
+            $('.box').removeClass('hide-after');
+            $('#file').removeAttr('disabled');
+            $('#file').css('z-index', '1000');
+            $form.removeClass('is-uploading');
 
-    }, 2000);
+        }, 1000);
+    } else {
+        var selector = '.box__success';
+        var success = '#success'; 
+        
+        console.log($(this));
+
+        if($(this).hasClass('box__failure-button')) {
+
+            selector = '.box__failure';
+            success = '#failure';
+        }
+        var toptext = selector + '-top-text';
+        $(this).removeClass('active');
+        $(toptext).removeClass('active');
+        $(success).removeClass('active');
+        var that = this;
+        setTimeout(function () {
+            $(that).addClass('hide');
+            console.log(that);
+            $(selector + '-top-text').addClass('hide');
+            $(success).addClass('hide');
+            
+            var intro = document.getElementById('intro');
+            var upload = document.getElementById('upload');
+            $(upload).addClass('hide');  
+            $(intro).removeClass('hide');
+            whole.classList.add('active');
+            upload.classList.remove('animate-upload');
+            setTimeout(function() {
+                whole.classList.add('active2'); 
+                setTimeout(function() {
+                    whole.classList.remove('active2'); 
+                    whole.classList.remove('active'); 
+                    setTimeout(function() {
+                        intro.classList.add('hide');
+                        setTimeout(function() {
+                            //$("#form").prop('disabled', false);​
+                            upload.classList.remove('hide');
+                            upload.classList.add('animate-upload');
+                            $('#upload-text').removeClass('hide');
+                            $label.text = 'Drag an image in or click to upload';
+                            $label.removeClass('hide');
+                            $('.box').removeClass('hide-before');
+                            $('.box').removeClass('hide-after');
+                            $('#file').removeAttr('disabled');
+                            $('#file').css('z-index', '1000');
+                            $form.removeClass('is-uploading');
+                        });
+                    }, 500);
+                }, 700);
+            }, 200);
+
+        }, 2000);
+    }
 
     //$(selector).css('display', 'none');
 });
 window.onload = function() {
+    init();
     var whole = document.getElementById('whole'); 
     var left = document.getElementById('left-half');
     var right = document.getElementById('right-half');
@@ -230,6 +250,11 @@ window.onload = function() {
     var i = document.getElementById('I');
     var intro = document.getElementById('intro');
     var upload = document.getElementById('upload');
+    var title = document.getElementById('title-container');
+    document.getElementById('title-button').onclick = function() {
+        title.classList.remove('active');
+        
+    }
     a.classList.add('active');
     setTimeout(function() {
         j.classList.add('active');
@@ -249,17 +274,21 @@ window.onload = function() {
                             whole.classList.remove('active2'); 
                             whole.classList.remove('active'); 
                             setTimeout(function() {
-                            i.classList.add('hide');
-                            a2.classList.add('hide');
-                            setTimeout(function() {
-                                intro.classList.add('hide');
+                                i.classList.add('hide');
+                                a2.classList.add('hide');
                                 setTimeout(function() {
-                                    upload.classList.remove('hide');
-                                    upload.classList.add('animate-upload');
-                                    $form = $('#form');
-                                    $label = $('#upload-text');
-                                })
-                            }, 500);
+                                    intro.classList.add('hide');
+                                    title.classList.remove('hide');
+                                    setTimeout(function() {
+                                        title.classList.add('active');
+                                        
+                                        //upload.classList.remove('hide');
+                                        //upload.classList.add('animate-upload');
+                                        
+                                        $form = $('#form');
+                                        $label = $('#upload-text');
+                                    })
+                                }, 500);
                             }, 100);
                         }, timeout);
 
@@ -272,3 +301,28 @@ window.onload = function() {
     
     
 }
+function init() {
+
+    var overlay = $('.md-overlay');
+    var trigger = $('.md-trigger');
+    //var att = trigger.attr('data-modal');
+    var modal = $('#modal-1');
+    var close = $('.md-close');
+    trigger.on('click', function(event) {
+        modal.addClass('md-show');
+        
+        overlay.off( 'click', removeModal);
+        overlay.on( 'click', removeModal);
+
+    });
+    close.on('click', function(event) {
+        event.stopPropagation();
+        removeModal();
+    });
+    function removeModal( hasPerspective ) {
+        modal.removeClass('md-show');
+    }
+
+
+}
+
