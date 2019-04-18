@@ -44,7 +44,7 @@ if (isAdvancedUpload) {
         droppedFiles = e.originalEvent.dataTransfer.files;
         console.log(e.originalEvent.dataTransfer);
         console.log(droppedFiles);
-        showFiles(...droppedFiles);
+        showFiles.apply(null, droppedFiles);
         console.log('drop');
 
         $form.trigger('submit');
@@ -169,6 +169,9 @@ $('.box__success-button, .box__failure-button').on('click', function() {
     console.log('CLICK');
     if ($(this).attr('id') == 'title-button') {
         setTimeout(function() {
+            document.querySelector("meta[name=viewport]").setAttribute(
+                'content', 
+                'width=device-width');
             document.getElementById('title-container').classList.add('hide');
             upload.classList.remove('hide');
             upload.classList.add('animate-upload');
@@ -278,6 +281,9 @@ window.onload = function() {
                                 a2.classList.add('hide');
                                 setTimeout(function() {
                                     intro.classList.add('hide');
+                                    document.querySelector("meta[name=viewport]").setAttribute(
+                                        'content', 
+                                        'width=device-width, initial-scale=0.8');
                                     title.classList.remove('hide');
                                     setTimeout(function() {
                                         title.classList.add('active');
